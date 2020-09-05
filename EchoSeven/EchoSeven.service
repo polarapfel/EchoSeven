@@ -1,0 +1,17 @@
+[Unit]
+Description=Echo Seven
+
+[Service]
+Type=notify
+WorkingDirectory=/opt/EchoSeven
+ExecStart=/opt/EchoSeven/EchoSeven
+SyslogIdentifier=EchoSeven
+# root is required to bind to default port 7 for RFC 862.
+# The process drops root privileges once the port is bound to a socket
+User=root
+Restart=always              
+RestartSec=5
+Environment=DOTNET_ROOT=/usr/share/dotnet 
+
+[Install]
+WantedBy=multi-user.target

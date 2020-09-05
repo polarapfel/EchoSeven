@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EchoSeven", "EchoSeven\EchoSeven.csproj", "{D2CFEAC0-3468-4E4C-B12C-1D6E7725F0D0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EchoSevenUtility", "EchoSevenUtility\EchoSevenUtility.csproj", "{F03187D6-0C05-41CF-85D9-AD8EE1B79D99}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D2CFEAC0-3468-4E4C-B12C-1D6E7725F0D0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D2CFEAC0-3468-4E4C-B12C-1D6E7725F0D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D2CFEAC0-3468-4E4C-B12C-1D6E7725F0D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D2CFEAC0-3468-4E4C-B12C-1D6E7725F0D0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F03187D6-0C05-41CF-85D9-AD8EE1B79D99}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F03187D6-0C05-41CF-85D9-AD8EE1B79D99}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F03187D6-0C05-41CF-85D9-AD8EE1B79D99}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F03187D6-0C05-41CF-85D9-AD8EE1B79D99}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
