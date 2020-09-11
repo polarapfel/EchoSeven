@@ -23,11 +23,12 @@ namespace EchoSeven
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
+            _logger.LogDebug("Using configuration from " + _options.Source);
             _logger.LogDebug("Configure echo service for " + _options.IPAddress);
             
-            var echoTcpServer = new EchoTcpServer(IPAddress.Parse(_options.IPAddress), _options.Port, _logger);
-            var echoUdpServer = new EchoUdpServer(IPAddress.Parse(_options.IPAddress), _options.Port, _logger);
-            if (echoTcpServer.Start())
+            _echoTcpServer = new EchoTcpServer(IPAddress.Parse(_options.IPAddress), _options.Port, _logger);
+            _echoUdpServer = new EchoUdpServer(IPAddress.Parse(_options.IPAddress), _options.Port, _logger);
+            if (_echoTcpServer.Start())
             {
                 _logger.LogInformation("Echo TCP Server started.");
             }
@@ -37,7 +38,7 @@ namespace EchoSeven
                 Environment.Exit(1);
             }
             
-            if (echoUdpServer.Start())
+            if (_echoUdpServer.Start())
             {
                 _logger.LogInformation("Echo UDP Server started.");
             }
@@ -57,7 +58,7 @@ namespace EchoSeven
                 await Task.Delay(30000, stoppingToken);
             }
 
-            if (echoUdpServer.Stop())
+            if (_echoUdpServer.Stop())
             {
                 _logger.LogInformation("Echo UDP Server stopped successfully.");
             }
@@ -66,7 +67,7 @@ namespace EchoSeven
                 _logger.LogError("Error stopping Echo UDP Server.");
             }
 
-            if (echoTcpServer.Stop())
+            if (_echoTcpServer.Stop())
             {
                 _logger.LogInformation("Echo TCP Server stopped successfully.");
             }
@@ -82,5 +83,6 @@ namespace EchoSeven
         public int Port { get; set; }
         public string IPAddress { get; set; }
         public string User { get; set; }
+        public string Source { get; set; }
     }
 }
