@@ -28,19 +28,22 @@ build: publish
 
 all: clean restore publish
 
-install: publish
-	cp -u -r -v ./target/* /
-	chmod 600 /etc/EchoSeven/appsettings.json
+install:
+ifdef $(DESTDIR)
+	mkdir -p $(DESTDIR)
+endif
+	cp -u -r -v ./target/* $(DESTDIR)/
+	chmod 600 $(DESTDIR)/etc/EchoSeven/appsettings.json
 
 post-install:
 	useradd -r -s /sbin/nologin echoseven
 	systemctl daemon-reload
 
 uninstall:
-	rm -rf /opt/EchoSeven
-	rm /etc/systemd/system/EchoSeven.service
-	rm -rf /etc/EchoSeven
-	rm /usr/share/man/man8/echoseven.1.gz
+	rm -rf $(DESTDIR)/opt/EchoSeven
+	rm $(DESTDIR)/etc/systemd/system/EchoSeven.service
+	rm -rf $(DESTDIR)/etc/EchoSeven
+	rm $(DESTDIR)/usr/share/man/man8/echoseven.1.gz
 
 post-uninstall:
 	userdel echoseven
