@@ -28,7 +28,7 @@ build: publish
 
 all: clean restore publish
 
-install:
+install: publish
 	cp -u -r -v ./target/* /
 	chmod 600 /etc/EchoSeven/appsettings.json
 
