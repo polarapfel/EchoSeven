@@ -1,0 +1,60 @@
+.\" Manpage for EchoSeven.
+.\" Contact tobiaw@microsoft.com to correct errors or typos.
+.TH man 8 "09 September 2020" "1.0" "EchoSeven man page"
+.SH NAME
+EchoSeven \- RFC 862 Echo Server
+.SH SYNOPSIS
+EchoSeven
+.SH DESCRIPTION
+.P
+EchoSeven is an RFC 862 echo server for TCP and UDP. It's multi-threaded, runs on TCP/UDP Port 7 by default, accepts configuration via a configuration file, only requires root privileges to read its configuration file and bind port 7 (or any other configured port in the low range) to a socket and will drop its root privileges after that.
+.P
+EchoSeven is integrated with Systemd, so there is no need to call its binary directly. Once installed properly, you can start EchoSeven using systemctl:
+
+.RS
+sudo systemctl start EchoSeven
+.RE
+
+EchoSeven will also hook into system logging through Systemd.
+
+.RS
+sudo journalctl \-u EchoSeven
+.RE
+
+.P
+This is an early release of EchoSeven and its functionality is very limited, albeit it completely implements RFC 862. You would typically use EchoSeven for network testing, for example measuring the round trip time of a TCP or UDP packet over the network.
+.SH OPTIONS
+There are no command line options currently. All configuration is done through the settings file in /etc/EchoSeven/appsettings.json
+.P
+/etc/EchoSeven/appsettings.json owner and group needs to be set to root and the file permissions must be either set to a 600 or 640 umask. If /etc/EchoSeven/appsettings.json doesn't exist, the ownership or permissions are not set correctly, EchoSeven will default to appsettings.json in its working directory. A default file ships with EchoSeven in its working directory.
+.P
+appsettings.json supports two sections:
+.RS
+Logging
+.RE
+.RS
+EchoService
+.RE
+.P
+You can define the log levels in Logging with a 'Default' log level and per .Net Core namespace log level. The namespace used for EchoSeven is 'EchoSeven' if you need to be more specific.
+.P
+The 'EchoService' section has configuration values for 'Port', 'IPAddress', 'User' and 'Source':
+
+.RS
+"Port": "7" \- Bind UDP/TCP network port 7
+.RE
+.RS
+"IPAddress": "0.0.0.0" \- Local IP address to bind to, use 0.0.0.0 to expose the echo server on all local IP addresses
+.RE
+.RS
+"User": "echoseven" \- User name used by EchoSeven after it drops root privileges. 'echoseven' user is created by installing EchoSeven.
+.RE
+.RS
+"Source": "/etc/EchoSeven/appsettings.json" - a string literal you can use to indicate in log files at log level 'Debug' which configuration file takes precedence.
+.RE
+.SH SEE ALSO
+RFC 862 - https://tools.ietf.org/html/rfc862
+.SH BUGS
+No known bugs. Please report issues here: https://github.com/polarapfel/EchoSeven/issues
+.SH AUTHOR
+Tobias W. (tobiaw@microsoft.com)
