@@ -1,4 +1,4 @@
-.PHONY: clean all install restore uninstall publish build post-install default
+.PHONY: clean all install restore uninstall publish build post-install default distclean
 
 default: publish
 
@@ -20,11 +20,13 @@ publish: restore
 	cd ./EchoSeven && dotnet publish -c Release -o ../target/opt/EchoSeven
 	cp ./packagefiles/EchoSeven.service ./target/etc/systemd/system/EchoSeven.service
 	cp ./packagefiles/appsettings.json ./target/etc/EchoSeven/appsettings.json
-	cp ./packagefiles/echoseven ./target/usr/share/man/man8/echoseven.1
-	chmod 0644 ./target/usr/share/man/man8/echoseven.1
-	gzip ./target/usr/share/man/man8/echoseven.1
+	cp ./packagefiles/echoseven ./target/usr/share/man/man8/echoseven.8
+	chmod 0644 ./target/usr/share/man/man8/echoseven.8
+	gzip ./target/usr/share/man/man8/echoseven.8
 
 build: publish
+
+distclean: clean
 
 all: clean restore publish
 
@@ -43,7 +45,7 @@ uninstall:
 	rm -rf $(DESTDIR)/opt/EchoSeven
 	rm $(DESTDIR)/etc/systemd/system/EchoSeven.service
 	rm -rf $(DESTDIR)/etc/EchoSeven
-	rm $(DESTDIR)/usr/share/man/man8/echoseven.1.gz
+	rm $(DESTDIR)/usr/share/man/man8/echoseven.8.gz
 
 post-uninstall:
 	userdel echoseven
