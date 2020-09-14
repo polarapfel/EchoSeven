@@ -6,7 +6,9 @@ There are many RFC 862 implementations, why create another one? For me, this was
 
 EchoSeven makes use of the .Net Core worker template, and the recently added Systemd support. It also leverages appsettings.json for configuration and uses libraries from Mono to make libc system calls to drop root privileges after binding TCP and UDP port 7 to a socket.
 
-I plan on adding the CI/CD automation to build a Debian package of EchoSeven. In other words, EchoSeven's primary purpose is not to provide yet another echo server implementation but a more extended and complete template for anyone wanting to build network daemons for Linux written in C# and using .Net Core.
+You might also find use for [DebianEchoSeven](https://github.com/polarapfel/DebianEchoSeven) which provides the boilerplate for building a Debian package out of this source repository.
+
+In other words, EchoSeven's primary purpose is not to provide yet another echo server implementation but a more extended and complete template for anyone wanting to build network daemons for Linux written in C# and using .Net Core.
 
 If you plan on using an echo server that does a little more than what RFC 862 describes, this code base can also be a great starting point for you, allowing you to add whatever functionality you have in mind. I have my own ideas already...
 
